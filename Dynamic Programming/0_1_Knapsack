@@ -15,7 +15,7 @@ def knapsack_0_1(weight,value,max_weight):
     return max_value,dp
 
 def find_item(max_weight,dp,weight): ## find the item
-    j = max_weight-1
+    j = max_weight
     num = len(weight)
     in_pack = np.zeros((1,num))## try to find which one is put in the pack
     for i in reversed(range(num)):
