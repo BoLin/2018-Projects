@@ -1,11 +1,12 @@
 ## 4/9/2018 Knapsack Bo Lin
 import numpy as np
+
 def knapsack_0_1(weight,value,max_weight):
     num = len(weight) ## get the number of distinct items
-    dp = np.zeros((num,max_weight)) ## initialize dp matrix
+    dp = np.zeros((num,max_weight+1)) ## initialize dp matrix
     ## transfer function dp[i][j]=max(f[i-1][j],f[i-1][j-weight[i]]+value[i])。
     for i in range(num):
-        for j in range(max_weight):
+        for j in range(max_weight+1):
             if weight[i] > j:
                 dp[i][j] = dp[i-1][j]
             else:
@@ -25,6 +26,7 @@ def find_item(max_weight,dp,weight): ## find the item
             in_pack[0][i] = 1
     return in_pack
 
+#test
 weight = [1,2,2,3,4,5,6,3,5]
 value  = [3,5,2,2,4,3,4,9,4]
 max_weight = 13
