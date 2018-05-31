@@ -7,7 +7,7 @@ class Solution:
         i = 0
         while i < len(nums)-1: ##此处索引一直更新所以不会超限
             if nums[i] == nums[i+1]:
-                A.remove(A[i])
+                nums.remove(nums[i])
             else:
                 i += 1
         return len(nums)
