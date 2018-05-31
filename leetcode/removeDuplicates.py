@@ -12,7 +12,7 @@ class Solution:
                 i += 1
         return len(A)
     
-    ## 此处的i 循环不更新，所以会索引超限
+    ## 如果用for loop会有问题，此处的i 循环不更新，所以会索引超限
         for i in range(len(nums)-1):
             if nums[i] == nums[i+1]:
                 nums.remove(nums[i])
