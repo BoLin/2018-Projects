@@ -1,4 +1,5 @@
 # in order to extract frames from a long video, this simple code is written to do the job.
+# part of it is learned from CSDN
 import cv2
 def get_video_pic(name):
     cap = cv2.VideoCapture(name)
