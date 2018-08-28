@@ -81,28 +81,35 @@ from PIL import Image
 hash_lib = set() # create an empty set to store hash
 hash_trash = list() #create an trash bin for duplicate picture
 start = 1
-stop = 52
-k = 10 # hash distance tolerance
+stop = 121
+k = 5 # hash distance tolerance
 #method 1: no hash distance
 #for i in range(start,stop):
 #    name = 'demo '+"(%d)"%i  +'.jpg'
 #    img = Image.open(name)
 #    hash_new = DHash.calculate_hash(img) # read image
-#	if hash_new not in hash_lib: # find new hash value
+#    if hash_new not in hash_lib: # find new hash value
 #        hash_lib.add(hash_new)
 #    else:
-#		# hash_trash.append(name)
+#        # hash_trash.append(name)
 #        os.remove(name) # delete the duplicated picture
+
+
 #method 2 : k hash distance
-hash_lib_2 = list()
 for i in range(start,stop):
     name = 'demo '+"(%d)"%i  +'.jpg'
     img = Image.open(name)
-    hash_new = DHash.calculate_hash(img) # read image
-	for hash_old in hash_lib_2:
-	    hamming_distance = DHash.hamming_distance(hash_old, hash_new)
-      if hamming_distance > k:
-	        hash_lib_2.append(hash_new)
+    hash_new = DHash.calculate_hash(img)
+    if i == start:
+        hash_lib_2 = [hash_new]
+        hash_lib.add(hash_new)
     else:
-		# hash_trash.append(name)
-        os.remove(name) # delete the duplicated picture
+        if hash_new in hash_lib:
+            os.remove(name)
+        else:
+            for hash_old in hash_lib_2:
+                hamming_distance = DHash.hamming_distance(hash_old,hash_new)
+                if hamming_distance < k:
+                    os.remove(name)
+                    break
+            hash_lib_2.append(hash_new)
