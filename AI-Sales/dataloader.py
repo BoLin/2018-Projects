@@ -38,7 +38,7 @@ def dataloader():
             else:
                 continue
         count+=1
-        if count == 10:break
+        #if count == 10:break
         # print(count)
     return input_value, output_value
 
@@ -78,6 +78,7 @@ def data_norm(input_value):
 
 def test():
     x, y = dataloader()
-    x1, = data_norm(x)
-    print("==================")
-    print(x1)
+    x1 = data_norm(x)
+    #print("==================")
+    #print(x1)
+    return x1, y
