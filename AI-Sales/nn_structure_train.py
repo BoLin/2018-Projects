@@ -2,6 +2,7 @@ import numpy as np
 import scipy
 import matplotlib
 from sklearn.neural_network import MLPClassifier
+from sklearn.externals import joblib
 import dataloader
 
 X, Y = dataloader.test()
@@ -24,3 +25,7 @@ for i in range(10,60):
 
 print(max)
 print(match)
+#save model
+clf = MLPClassifier(solver = 'adam',alpha = 1e-5, hidden_layer_sizes = (match[0],match[1],match[2],match[3]), random_state = 1)
+                clf.fit(X,Y)
+joblib.dump(clf,"nn_train_model.m")
