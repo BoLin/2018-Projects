@@ -4,8 +4,10 @@ import matplotlib
 from sklearn.neural_network import MLPClassifier
 from sklearn.svm import SVC
 import dataloader
+from sklearn.externals import joblib
 
-X, Y = dataloader.test()
+local_path = "./Test_set/label_scene_4_train/" # trainning path
+X, Y = dataloader.test(local_path)
 #clf = SVC()
 clf = MLPClassifier(solver='adam', alpha=1e-5, hidden_layer_sizes=(62,53,21,16), random_state=1)
 clf.fit(X, Y)
@@ -23,3 +25,5 @@ for i in range(len(Y[0])):
     print(i)
     print(correct/(correct + wrong))
     print("================")
+#save model
+joblib.dump(clf,"nn_train_model_scene_4.m")
