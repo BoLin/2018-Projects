@@ -6,6 +6,7 @@ import numpy as np
 from sklearn.externals import joblib
 import data_norm_single
 import csv
+import coor_validation as coor
 
 file_name = "name2id.csv"
 dict_csv = {}
@@ -21,6 +22,7 @@ file_ext = ".json"
 json_dict = dict() # initial dict
 json_dict["result"] = []
 old_id = ''
+#problem = 0
 for i in range(1,6): #scene 1,2,3,4,5i
     nn_model = joblib.load('nn_train_model_scene_%d.m' % (i)) # correspondent nn model
     with open("alphapose-results_scene_%d.json"%(i)) as f: # open an json file for that scene
@@ -42,14 +44,20 @@ for i in range(1,6): #scene 1,2,3,4,5i
         with open(label_name) as ff: # open that specific json file
             label_data = json.load(ff)
         label_data_object = label_data.get("annotation")[0].get("object")  # get all objects from that label file
+
         for single_object in label_data_object:
+
             minx, miny, maxx, maxy = single_object["minx"], single_object["miny"], single_object["maxx"], single_object["maxy"]
+
             if (x_test - minx) >= 0 and (maxx - x_test) >= 0 and (y_test - miny) >= 0 and (maxy - y_test) >= 0:  # object in the labeled one
                 x12y2 = [minx, miny, maxx, maxy]
                 a12c17 = single_object_a.get("keypoints")
                 raw_output = x12y2 + a12c17  # concat two list together
                 X_raw = [round(i, 3) for i in raw_output]
                 X = [data_norm_single.data_norm(X_raw)] # 51 inputs
+                if coor.coor(X[0]):
+                    #problem += 1
+                    break
                 Y_predict_raw = nn_model.predict(X)
                 Y_predict = Y_predict_raw[0]
                 Y_list = []
@@ -73,14 +81,14 @@ for i in range(1,6): #scene 1,2,3,4,5i
                 single_dict["confidence"] = 1
                 json_dict["result"][-1]["object"].append(single_dict)
                 # wright in the json
-
                 break   # find the object label
             else:
                 continue
 
+
 # dump json
-print(json_dict)
+#print(json_dict)
 result_path = "val_result.json"
 with open(result_path,'w') as f:
     json.dump(json_dict,f)
-
+#print(problem)
