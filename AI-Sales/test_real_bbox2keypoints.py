@@ -1,6 +1,7 @@
 
 # for test val set
 # 这个有点蠢 archive 一下
+
 import os
 import json
 import numpy as np
@@ -10,20 +11,21 @@ import csv
 import coor_validation as coor
 import math
 
-# file_name = "name2id.csv"
-# dict_csv = {}
-# with open(file_name) as f:
-#     reader = csv.DictReader(f)
-#     for row in reader:
-#         dict_csv[row["filename"]] = row["image_id"]
+# this part for val
+file_name = "name2id.csv"
+dict_csv = {}
+with open(file_name) as f:
+    reader = csv.DictReader(f)
+    for row in reader:
+        dict_csv[row["filename"]] = row["image_id"]
 
-with open("file2id.json") as f:
-    dict_csv = json.load(f)
+# this part for train
+# with open("file2id.json") as f:
+#     dict_csv = json.load(f)
 
 
-
-#local_path = "./val_json_result/" # file path for bbox
-local_path = "./bot_train_person_keypoints/bot_train_json_result/" # file path for bbox
+local_path = "./val_json_result/" # file path for bbox
+#local_path = "./bot_train_person_keypoints/bot_train_json_result/" # file path for bbox
 file_ext = ".json"
 json_dict = dict() # initial dict
 json_dict["results"] = []
@@ -35,8 +37,8 @@ json_dict = dict() # initial dict output
 json_dict["results"] = []
 
 
-#keypoints_path = "results_bot_val_new.json"
-keypoints_path = "./bot_train_person_keypoints/results_bot_train_keypoints.json"
+keypoints_path = "results_bot_val_new.json"
+#keypoints_path = "./bot_train_person_keypoints/results_bot_train_keypoints.json"
 file_dict = os.listdir(local_path)
 
 for single_file in file_dict:
@@ -99,8 +101,8 @@ for single_file in file_dict:
         single_dict["stand"] = Y_list[3]
         single_dict["sit"] = Y_list[4]
         single_dict["play_with_phone"] = Y_list[5]
-        single_dict["male"] = Y_list[0]
-        single_dict["female"] = 1 - Y_list[0]
+        single_dict["male"] = 1 - Y_list[0]
+        single_dict["female"] = Y_list[0]
         single_dict["confidence"] = 1
         json_dict["results"][-1]["object"].append(single_dict)
         # wright in the json
