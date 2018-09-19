@@ -1,6 +1,6 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
-# evaluation program
+
 import os
 
 def Calculation(label_coordinate, forecast_coordinate):
@@ -22,7 +22,7 @@ if __name__ == "__main__":
     #with open('filename_id.csv', 'r') as ff:
     #    lines_id = ff.read().splitlines()
 
-    with open('val_result_gender_918.json', 'r') as Jf:
+    with open('val_result_nogender.json', 'r') as Jf:
         val_json = Jf.read()
     val_json = eval(val_json)
 
@@ -70,7 +70,7 @@ if __name__ == "__main__":
                                 e.append(Calculation(label_coordinate, forecast_coordinate))
 
                             if min(e) <= 0.25:
-                                forecast_object = image_dict["object"][e.index(max(e))]
+                                forecast_object = image_dict["object"][e.index(min(e))]
                                 summ += forecast_object["confidence"]
 
                                 if single_object["gender"] == 1:
