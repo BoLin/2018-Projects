@@ -9,8 +9,7 @@ data_dir = f.read().split("\n")
 
 new_dir = '../Fashion/All/'
 # 待定的命名
-# old_path = ./Maison-Martin-Margiela/2018-aw-RTW/_ARC0100h.jpg.360X540
-# new_path = ./MMM_18awR_ARC0100h.jpg
+
 # read data
 error = 0
 for each_pic in data_dir:
