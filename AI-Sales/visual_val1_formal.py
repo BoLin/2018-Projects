@@ -8,7 +8,7 @@ import csv
 
 img_path = "./val1_pic"
 img_path_dict = os.listdir(img_path)
-result_path = "./Formal_Result/宝智尊_val1_20180919_1.json" # ===== 只输入提交结果
+result_path = "...json" # ===== 只输入提交结果
 new_img_path = "./vis_img/"
 # ======= id2file ==============
 file_name = "name2id.csv"
