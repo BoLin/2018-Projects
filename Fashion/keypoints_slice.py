@@ -3,8 +3,8 @@ import os
 #  把keypoint 的 json文件 按照文件名 分割 一个文件下含有一张图上所有的keypoints
 
 
-keypoints_path = "C:/Users/lsh11941/Documents/Fashion/Fashion/alphapose-results.json"
-folder_path = "C:/Users/lsh11941/Documents/Fashion/Fashion/keypoints/"
+keypoints_path = "../Fashion/Fashion/alphapose-results.json"
+folder_path = "../Fashion/Fashion/keypoints/"
 os.makedirs（folder_path）
 
 with open(keypoints_path) as f:
