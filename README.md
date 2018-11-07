@@ -5,4 +5,4 @@ There are classic algorithm practices in Data Structure, BSF/DSF, Dynamic Progra
 
 There are also trending topics like Object Detection, Semantic Segmentation, etc. 
 
-Some are for my own interests in Computer Science, some are for **other** usage which involves Computer Vision and eCommerce.
+Some are for my own interests in Computer Science, some are for **other** usage which involves Computer Vision etc.
